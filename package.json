@@ -11,6 +11,7 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.3",
     "@nuxt/eslint": "^0.3.13",
     "@nuxt/ui": "^2.17.0",
     "@nuxthub/core": "^0.7.0",
