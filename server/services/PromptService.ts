@@ -30,7 +30,8 @@ const nameScorePrompt = `You are an AI assistant specialized in evaluating and s
     }
   },
   "overallScore": 0,
-  "summary": "Concise summary of strengths and weaknesses of the name"
+  "pros": ["concise list of domain name strengths"],
+  "cons": ["concise list of domain name weaknesses"]
 }
 
 Evaluate the domain based on these categories and weights:
@@ -41,7 +42,7 @@ Evaluate the domain based on these categories and weights:
 5. Legal and Cultural Factors (10%): Potential trademark risks, cultural/linguistic considerations.
 6. Market Potential (5%): Ability to target desired audience, scalability for business growth.
 
-Provide a score out of 10 for each category, along with a brief explanation. Calculate the weighted overall score out of 10. Include a concise summary of strengths and weaknesses of the domain name. Ensure all JSON fields are properly filled.
+Provide a score out of 10 for each category, along with a brief explanation. Calculate the weighted overall score out of 10. Include concise lists of strengths and weaknesses of the domain name. Ensure all JSON fields are properly filled.
 `;
 
 const systemPrompts = {
