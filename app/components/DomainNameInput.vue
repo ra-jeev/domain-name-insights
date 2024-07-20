@@ -1,10 +1,10 @@
 <template>
   <form class="relative w-full max-w-sm" @submit.prevent="onSubmit">
     <UInput
-      v-model="nameInput"
+      v-model.trim="nameInput"
       placeholder="Enter a domain name..."
       size="xl"
-      :ui="{ rounded: 'rounded-full', padding: { xl: 'pr-32' } }"
+      :ui="{ rounded: 'rounded-full', padding: { xl: 'pr-28' } }"
     />
     <UButton
       trailing-icon="i-heroicons-rocket-launch"
@@ -12,7 +12,7 @@
       size="md"
       type="submit"
     >
-      Get Score
+      Analyze
     </UButton>
   </form>
 </template>
@@ -20,13 +20,15 @@
 <script setup lang="ts">
 const nameInput = ref("");
 
+const emit = defineEmits(["name-input"]);
+
 const onSubmit = () => {
   if (!nameInput.value) {
     alert("Please enter a domain name");
-    return;
   } else if (!isValidDomain(nameInput.value)) {
     alert("Please enter a valid domain name");
-    return;
+  } else {
+    emit("name-input", nameInput.value);
   }
 };
 </script>
