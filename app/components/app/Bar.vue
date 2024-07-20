@@ -7,7 +7,17 @@
       :class="`h-[--header-height]`"
     >
       <AppLogo />
-      <ColorMode />
+      <div class="flex items-center gap-x-4">
+        <ColorMode />
+        <UButton
+          to="https://github.com/ra-jeev/domain-name-insights"
+          icon="i-simple-icons-github"
+          aria-label="github"
+          color="gray"
+          target="_blank"
+          variant="ghost"
+        />
+      </div>
     </UContainer>
   </header>
 </template>

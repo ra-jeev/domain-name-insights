@@ -15,7 +15,7 @@
         d="m15 9l.94-2.07L18 6l-2.06-.93L15 3l-.92 2.07L12 6l2.08.93zM3.5 11L4 9l2-.5L4 8l-.5-2L3 8l-2 .5L3 9z"
       />
     </svg>
-    <div :class="textSize" class="leading-none font-bold">NameScore</div>
+    <div :class="textSize" class="leading-none font-bold">Name Insights</div>
   </ULink>
 </template>
 
