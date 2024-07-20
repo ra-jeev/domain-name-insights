@@ -13,4 +13,7 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: true },
+  ui: {
+    icons: ["simple-icons"],
+  },
 });
