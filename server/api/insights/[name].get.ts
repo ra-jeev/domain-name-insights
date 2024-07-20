@@ -1,8 +1,8 @@
-import { getAIService } from "../services/AIServiceFactory";
+import { getAIService } from "~~/server/services/AIServiceFactory";
 
 export default defineEventHandler(async (event) => {
-  const query = getQuery(event);
-  if (!query.name) {
+  const { name } = event.context.params || {};
+  if (!name) {
     throw createError({
       statusCode: 400,
       statusMessage: "Domain name is required",
@@ -11,5 +11,5 @@ export default defineEventHandler(async (event) => {
 
   const service = getAIService();
 
-  return await service.getDomainScore(query.name as string);
+  return await service.getDomainScore(name);
 });
