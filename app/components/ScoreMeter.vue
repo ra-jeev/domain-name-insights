@@ -16,7 +16,6 @@
         stroke-width="10"
         :stroke-dasharray="circumference"
         :stroke-dashoffset="dashOffset"
-        stroke-linecap="round"
         stroke="currentColor"
         fill="transparent"
         :r="circleRadius"
