@@ -1,35 +1,63 @@
 <template>
   <UCard>
-    <div class="flex items-center gap-x-4 md:gap-x-6 mb-6 md:mb-8">
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8"
+    >
       <ScoreMeter :percentage="data.overallScore" :size="120" />
       <div class="flex-1">
-        <div class="text-xl md:text-2xl font-bold mb-4">Overall Score</div>
-        <h2 class="text-lg md:text-xl font-semibold text-primary mb-1">
-          <span class="text-gray-500 dark:text-gray-400">Domain:</span>
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">
           {{ data.domainName }}
         </h2>
-        <p>
-          <span class="text-gray-500 dark:text-gray-400">Suitable for:</span>
-          {{ data.guessedPurpose }}
-        </p>
+
+        <div class="flex items-center">
+          <UBadge color="yellow" class="mr-2 flex items-center">
+            <UIcon name="i-heroicons-light-bulb" class="w-4 h-4 mr-1" />
+            Best for
+          </UBadge>
+          <p class="text-lg text-gray-600 dark:text-gray-300">
+            {{ data.guessedPurpose }}
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       <div>
-        <h3 class="font-semibold text-gray-500 dark:text-gray-400 mb-2">
-          Pros:
+        <h3
+          class="text-lg font-semibold text-green-600 dark:text-green-400 mb-3"
+        >
+          Pros
         </h3>
-        <ul class="list-disc list-inside">
-          <li v-for="(pro, index) in data.pros" :key="index">{{ pro }}</li>
+        <ul class="space-y-2">
+          <li
+            v-for="(pro, index) in data.pros"
+            :key="`pro-${index}`"
+            class="flex items-start"
+          >
+            <UIcon
+              name="i-heroicons-check-circle"
+              class="w-5 h-5 text-green-500 mr-2 mt-1"
+            />
+            <span>{{ pro }}</span>
+          </li>
         </ul>
       </div>
       <div>
-        <h3 class="font-semibold text-gray-500 dark:text-gray-400 mb-2">
-          Cons:
+        <h3 class="text-lg font-semibold text-red-600 dark:text-red-400 mb-3">
+          Cons
         </h3>
-        <ul class="list-disc list-inside">
-          <li v-for="(con, index) in data.cons" :key="index">{{ con }}</li>
+        <ul class="space-y-2">
+          <li
+            v-for="(con, index) in data.cons"
+            :key="`con-${index}`"
+            class="flex items-start"
+          >
+            <UIcon
+              name="i-heroicons-exclamation-circle"
+              class="w-5 h-5 text-red-500 mr-2 mt-1"
+            />
+            <span>{{ con }}</span>
+          </li>
         </ul>
       </div>
     </div>
