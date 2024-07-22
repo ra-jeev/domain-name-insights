@@ -1,12 +1,14 @@
 <template>
   <UCard>
-    <div class="flex items-center gap-x-4 md:gap-x-6">
+    <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
       <ScoreMeter :percentage="data.score" :size="80" />
-      <div>
-        <h3 class="text-lg md:text-xl font-semibold mb-2">
+      <div class="flex-1 text-center sm:text-left">
+        <h3 class="text-lg sm:text-xl font-semibold mb-2">
           {{ categoryName }}
         </h3>
-        <p class="text-gray-500 dark:text-gray-400">{{ data.explanation }}</p>
+        <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+          {{ data.explanation }}
+        </p>
       </div>
     </div>
   </UCard>
