@@ -1,7 +1,7 @@
 <template>
   <UCard>
     <div class="flex items-center gap-x-4 md:gap-x-6 mb-6 md:mb-8">
-      <ScoreMeter :percentage="0" :size="120" />
+      <ScoreMeter :percentage="0" :size="120" is-skeleton />
       <div class="flex-1">
         <USkeleton class="h-6 w-60 mb-4" />
         <USkeleton class="h-6 w-60 mb-1" />

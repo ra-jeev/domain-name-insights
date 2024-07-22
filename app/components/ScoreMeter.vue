@@ -1,8 +1,16 @@
 <template>
-  <div class="relative" :style="{ width: size + 'px', height: size + 'px' }">
+  <div
+    class="relative"
+    :class="{ 'animate-pulse': isSkeleton }"
+    :style="{ width: size + 'px', height: size + 'px' }"
+  >
     <svg class="w-full h-full" viewBox="0 0 100 100">
       <circle
-        class="text-gray-200 dark:text-gray-700"
+        :class="`${
+          isSkeleton
+            ? 'text-gray-100 dark:text-gray-800'
+            : 'text-gray-200 dark:text-gray-700'
+        }`"
         stroke-width="10"
         stroke="currentColor"
         fill="transparent"
@@ -26,7 +34,7 @@
 
     <div class="absolute inset-0 flex items-center justify-center">
       <div class="font-extrabold" :class="`${colorClass} ${textSizeClass}`">
-        {{ percentage }}%
+        {{ isSkeleton ? "--" : percentage }}%
       </div>
     </div>
   </div>
@@ -47,6 +55,10 @@ const props = defineProps({
     type: String,
     default: "primary",
   },
+  isSkeleton: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const circleRadius = 45;
@@ -54,8 +66,10 @@ const circumference = computed(() => 2 * Math.PI * circleRadius);
 const dashOffset = computed(
   () => circumference.value - (props.percentage / 100) * circumference.value
 );
-const colorClass = computed(
-  () => `text-${props.color}-500 dark:text-${props.color}-400`
+const colorClass = computed(() =>
+  props.isSkeleton
+    ? "text-gray-200 dark:text-gray-700"
+    : `text-${props.color}-500 dark:text-${props.color}-400`
 );
 const textSizeClass = computed(() => {
   if (props.size <= 40) return "text-[10px]";
