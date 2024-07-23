@@ -11,7 +11,7 @@
         <ColorMode />
         <UButton
           to="https://github.com/ra-jeev/domain-name-insights"
-          icon="i-simple-icons-github"
+          icon="i-mdi-github"
           aria-label="github"
           color="gray"
           target="_blank"
