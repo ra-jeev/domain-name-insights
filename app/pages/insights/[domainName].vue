@@ -1,16 +1,26 @@
 <template>
-  <UContainer
-    class="py-4 flex flex-col gap-4 items-center justify-center min-h-[500px]"
-  >
-    <div v-if="status === 'pending'">Loading ...</div>
-    <div v-else class="max-w-lg whitespace-pre text-pretty">
-      {{ JSON.stringify(insights, null, 4) }}
-    </div>
+  <UContainer class="py-12 w-full max-w-4xl">
+    <DomainScoreLoader v-if="status === 'pending'" />
+    <template v-else-if="insights">
+      <div class="flex justify-center mb-6">
+        <DomainNameInput
+          :name="route.params.domainName as string"
+          @name-input="onNameInput"
+        />
+      </div>
+      <DomainScoreDisplay :score-data="insights" />
+    </template>
+    <div v-else>Something went wrong</div>
   </UContainer>
 </template>
 
 <script setup lang="ts">
+const route = useRoute();
 const { data: insights, status } = await useLazyFetch(
-  `/api/insights/${useRoute().params.domainName}`
+  `/api/insights/${route.params.domainName}`
 );
+
+const onNameInput = async (name: string) => {
+  navigateTo(`/insights/${name}`);
+};
 </script>
