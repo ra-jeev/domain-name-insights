@@ -23,7 +23,7 @@
 defineProps({
   textSize: {
     type: String,
-    default: "text-2xl",
+    default: "text-xl",
   },
   iconSize: {
     type: Number,

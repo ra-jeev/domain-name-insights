@@ -25,19 +25,19 @@ const scoreRanges = [
     label: "0-49",
     icon: "i-mdi-face-sad",
     description: "Needs Improvement",
-    colorClass: "text-red-500",
+    colorClass: "text-red-500 dark:text-red-400",
   },
   {
     label: "50-79",
     icon: "i-mdi-face-neutral",
     description: "Average",
-    colorClass: "text-yellow-500",
+    colorClass: "text-yellow-500 dark:text-yellow-400",
   },
   {
     label: "80-100",
     icon: "i-mdi-face-happy",
     description: "Good",
-    colorClass: "text-green-500",
+    colorClass: "text-green-500 dark:text-green-400",
   },
 ];
 </script>
