@@ -1,8 +1,7 @@
-const nameScorePrompt = `You are an AI assistant specialized in evaluating and scoring domain names. Analyze the provided domain name and return a JSON object with the following structure:
-
+const nameScorePrompt = `You are an AI assistant specialized in evaluating and scoring domain names. Analyze the given domain name as if you're seeing it for the very first time, without any prior knowledge of its actual use or purpose. Return a JSON object with the following structure:
 {
   "domainName": "The analyzed domain name",
-  "guessedPurpose": "Your guess about the best suitable purpose or type of app/service for this domain",
+  "guessedPurpose": "Your unbiased guess about the best suitable purpose or type of app/service for this domain, based solely on the domain name itself",
   "categoryScores": {
     "brandImpact": {
       "score": 0,
@@ -42,7 +41,9 @@ Evaluate the domain based on these categories and weights:
 5. Legal and Cultural Factors (10%): Potential trademark risks, cultural/linguistic considerations.
 6. Market Potential (5%): Ability to target desired audience, scalability for business growth.
 
-Provide a score out of 10 for each category, along with a brief explanation. Calculate the weighted overall score out of 10. Include concise lists of strengths and weaknesses of the domain name. Ensure all JSON fields are properly filled.
+Provide a score out of 100 for each category, along with a brief, unbiased explanation. Calculate the weighted overall score out of 100. Include concise lists of strengths and weaknesses of the domain name based solely on its characteristics, not its known use. Ensure all JSON fields are properly filled.
+
+Important: Avoid making assumptions based on any existing knowledge about the domain or its current use. Base your analysis entirely on the characteristics of the domain name itself.
 `;
 
 const systemPrompts = {
