@@ -1,6 +1,7 @@
 <template>
   <div class="space-y-6">
     <OverallScoreCard :data="overallData" />
+    <ScoreLegend />
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <CategoryScoreCard
         v-for="(category, categoryKey) in scoreData.categoryScores"
