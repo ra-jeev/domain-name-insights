@@ -36,7 +36,7 @@
           >
             <UIcon
               name="i-heroicons-check-circle"
-              class="w-5 h-5 text-green-500 mr-2 mt-1"
+              class="w-5 h-5 text-green-500 shrink-0 mr-2 mt-1"
             />
             <span>{{ pro }}</span>
           </li>
@@ -54,7 +54,7 @@
           >
             <UIcon
               name="i-heroicons-exclamation-circle"
-              class="w-5 h-5 text-red-500 mr-2 mt-1"
+              class="w-5 h-5 text-red-500 shrink-0 mr-2 mt-1"
             />
             <span>{{ con }}</span>
           </li>
