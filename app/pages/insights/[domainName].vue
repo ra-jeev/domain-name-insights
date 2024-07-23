@@ -4,7 +4,8 @@
     <template v-else-if="insights">
       <div class="flex justify-center mb-6">
         <DomainNameInput
-          :name="route.params.domainName as string"
+          :name="domainName"
+          class="w-full max-w-lg"
           @name-input="onNameInput"
         />
       </div>
@@ -15,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
+const { domainName } = useRoute().params as { domainName: string };
 const { data: insights, status } = await useLazyFetch(
-  `/api/insights/${route.params.domainName}`
+  `/api/insights/${domainName}`
 );
 
 const onNameInput = async (name: string) => {
