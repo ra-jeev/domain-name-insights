@@ -51,10 +51,6 @@ const props = defineProps({
     type: Number,
     default: 100,
   },
-  color: {
-    type: String,
-    default: "primary",
-  },
   isSkeleton: {
     type: Boolean,
     default: false,
@@ -66,11 +62,21 @@ const circumference = computed(() => 2 * Math.PI * circleRadius);
 const dashOffset = computed(
   () => circumference.value - (props.percentage / 100) * circumference.value
 );
-const colorClass = computed(() =>
-  props.isSkeleton
-    ? "text-gray-200 dark:text-gray-700"
-    : `text-${props.color}-500 dark:text-${props.color}-400`
-);
+
+const colorClass = computed(() => {
+  if (props.isSkeleton) {
+    return "text-gray-200 dark:text-gray-700";
+  }
+
+  if (props.percentage < 50) {
+    return "text-red-500 dark:text-red-400";
+  } else if (props.percentage < 80) {
+    return "text-yellow-500 dark:text-yellow-400";
+  } else {
+    return "text-green-500 dark:text-green-400";
+  }
+});
+
 const textSizeClass = computed(() => {
   if (props.size <= 40) return "text-[10px]";
   if (props.size < 52) return "text-xs";
