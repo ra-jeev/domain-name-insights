@@ -18,7 +18,14 @@
 </template>
 
 <script setup lang="ts">
-const nameInput = ref("");
+const props = defineProps({
+  name: {
+    type: String,
+    default: "",
+  },
+});
+
+const nameInput = ref(props.name);
 
 const emit = defineEmits(["name-input"]);
 
