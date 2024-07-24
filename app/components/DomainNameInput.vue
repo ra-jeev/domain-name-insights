@@ -1,5 +1,5 @@
 <template>
-  <form class="relative w-full max-w-sm" @submit.prevent="onSubmit">
+  <form class="relative w-full max-w-md" @submit.prevent="onSubmit">
     <UInput
       v-model.trim="nameInput"
       placeholder="Enter a domain name..."
@@ -12,7 +12,7 @@
       size="md"
       type="submit"
     >
-      Analyze
+      Analyze Now
     </UButton>
   </form>
 </template>

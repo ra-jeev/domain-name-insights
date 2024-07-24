@@ -7,7 +7,7 @@
       :class="`h-[--header-height]`"
     >
       <AppLogo />
-      <div class="flex items-center gap-x-4">
+      <div class="flex items-center gap-x-3">
         <ColorMode />
         <UButton
           to="https://github.com/ra-jeev/domain-name-insights"
