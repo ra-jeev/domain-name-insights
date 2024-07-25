@@ -53,7 +53,7 @@ export class AnthropicAIService extends BaseAIService {
 
     const response = await this.anthropic.messages.create({
       model: "claude-3-5-sonnet-20240620",
-      max_tokens: 1000,
+      max_tokens: 1500,
       temperature: 0.4,
       system: systemPrompt,
       messages: [
