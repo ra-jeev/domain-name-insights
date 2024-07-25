@@ -26,3 +26,8 @@ export type DomainScoreData = {
   pros: string[];
   cons: string[];
 };
+
+export type DomainsComparisonData = {
+  recommendation: { choice: string; reasoning: string };
+  domains: DomainScoreData[];
+};
