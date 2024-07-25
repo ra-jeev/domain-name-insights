@@ -44,4 +44,26 @@ export class AnthropicAIService extends BaseAIService {
 
     return (response.content[0] as Anthropic.TextBlock).text;
   }
+
+  async compareDomains(
+    firstDomain: string,
+    secondDomain: string
+  ): Promise<string> {
+    const systemPrompt = this.getSystemPrompt("compare");
+
+    const response = await this.anthropic.messages.create({
+      model: "claude-3-5-sonnet-20240620",
+      max_tokens: 1000,
+      temperature: 0.4,
+      system: systemPrompt,
+      messages: [
+        {
+          role: "user",
+          content: `Compare the following domain names: ${firstDomain} and ${secondDomain}`,
+        },
+      ],
+    });
+
+    return (response.content[0] as Anthropic.TextBlock).text;
+  }
 }

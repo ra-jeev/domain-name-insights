@@ -7,4 +7,9 @@ export abstract class BaseAIService implements AIService {
   }
 
   abstract getDomainScore(domainName: string): Promise<string>;
+
+  abstract compareDomains(
+    firstDomain: string,
+    secondDomain: string
+  ): Promise<string>;
 }
