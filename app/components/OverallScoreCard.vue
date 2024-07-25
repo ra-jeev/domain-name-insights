@@ -9,15 +9,13 @@
           {{ data.domainName }}
         </h2>
 
-        <div class="flex items-center">
-          <UBadge color="yellow" class="mr-2 flex items-center">
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+          <UBadge color="yellow" variant="subtle" class="mr-1">
             <UIcon name="i-heroicons-light-bulb" class="w-4 h-4 mr-1" />
             Best for
           </UBadge>
-          <p class="text-lg text-gray-600 dark:text-gray-300">
-            {{ data.guessedPurpose }}
-          </p>
-        </div>
+          {{ data.guessedPurpose }}
+        </p>
       </div>
     </div>
 
