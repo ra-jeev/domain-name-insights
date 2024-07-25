@@ -7,6 +7,15 @@
       :class="`h-[--header-height]`"
     >
       <AppLogo />
+      <div>
+        <ULink
+          to="/compare"
+          active-class="text-primary"
+          inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+        >
+          Compare Domains
+        </ULink>
+      </div>
       <div class="flex items-center gap-x-3">
         <ColorMode />
         <UButton
