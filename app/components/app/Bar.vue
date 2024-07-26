@@ -13,14 +13,14 @@
           active-class="text-primary"
           inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
         >
-          Compare Domains
+          Compare
         </ULink>
       </div>
       <div class="flex items-center gap-x-3">
         <ColorMode />
         <UButton
           to="https://github.com/ra-jeev/domain-name-insights"
-          icon="i-mdi-github"
+          icon="i-simple-icons-github"
           aria-label="github"
           color="gray"
           target="_blank"
