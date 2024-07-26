@@ -39,6 +39,13 @@ export default defineCachedEventHandler(
     }
 
     const [domain1, domain2] = domains;
+    if (domain1 === domain2) {
+      throw createError({
+        statusCode: 400,
+        statusMessage:
+          "Comparison is allowed between two different domain names",
+      });
+    }
 
     const data = await getAIService().compareDomains(domain1, domain2);
 
@@ -65,13 +72,10 @@ export default defineCachedEventHandler(
       if (domainsPart) {
         const domains = domainsPart.split(",");
         if (domains.length >= 2) {
-          const key = apiPath + domains.sort().join(",");
-          console.log("return key: ", key);
-          return key;
+          return apiPath + domains.sort().join(",");
         }
       }
 
-      console.log("return event.path as the key: ", event.path);
       return event.path;
     },
   }

@@ -34,6 +34,8 @@ const compareDomains = () => {
     alert(`"${domain1.value}" is not a valid domain name`);
   } else if (!isValidDomain(domain2.value)) {
     alert(`"${domain2.value}" is not a valid domain name`);
+  } else if (domain1.value === domain2.value) {
+    alert("Please enter two different domain names");
   } else {
     navigateTo(
       `/compare/${encodeURIComponent(domain1.value)},${encodeURIComponent(
