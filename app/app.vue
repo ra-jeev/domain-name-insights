@@ -21,7 +21,11 @@ useHead({
     { name: "viewport", content: "width=device-width, initial-scale=1" },
     { key: "theme-color", name: "theme-color", content: color },
   ],
-  link: [{ rel: "icon", href: "/favicon.ico" }],
+  link: [
+    { rel: "icon", href: "/favicon.ico", sizes: "any" },
+    { rel: "icon", href: "/logo.svg", type: "image/svg+xml" },
+    { rel: "apple-touch-icon", href: "/apple-touch-icon-180x180.png" },
+  ],
   htmlAttrs: {
     lang: "en",
   },
@@ -30,7 +34,7 @@ useHead({
 useSeoMeta({
   title: "Name Insights",
   description:
-    "A Nuxt template to build your full-stack application on the edge.",
+    "Get detailed insights on any potential domain name and see how it compares to other domains.",
 });
 </script>
 
