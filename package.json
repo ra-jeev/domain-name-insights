@@ -8,7 +8,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/logo.svg"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.3",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.3.13",
+    "@vite-pwa/assets-generator": "^0.2.4",
     "eslint": "^9.5.0",
     "vue-tsc": "^2.0.22",
     "wrangler": "^3.62.0"
