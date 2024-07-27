@@ -27,15 +27,13 @@ const props = defineProps({
 
 const nameInput = ref(props.name);
 
-const emit = defineEmits(["name-input"]);
-
 const onSubmit = () => {
   if (!nameInput.value) {
     alert("Please enter a domain name");
   } else if (!isValidDomain(nameInput.value)) {
     alert("Please enter a valid domain name");
   } else {
-    emit("name-input", nameInput.value);
+    navigateTo(`/insights/${nameInput.value}`);
   }
 };
 </script>
