@@ -15,16 +15,6 @@
             variant="ghost"
           />
         </div>
-        <div>
-          Want to talk?
-          <ULink
-            active-class="text-primary"
-            inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
-            to="mailto:i.rarsh@gmail.com?subject=[Ref: NameInsights]"
-          >
-            Email me
-          </ULink>
-        </div>
       </div>
     </UContainer>
   </footer>
@@ -38,9 +28,9 @@ const socials = [
     to: "https://twitter.com/ra_jeeves",
   },
   {
-    name: "github",
-    icon: "i-simple-icons-github",
-    to: "https://github.com/ra-jeev",
+    name: "email",
+    icon: "i-mdi-alternate-email",
+    to: "mailto:i.rarsh@gmail.com?subject=[Ref: NameInsights]",
   },
 ];
 </script>
