@@ -19,9 +19,6 @@ const saveComparisonResult = async (
 
 export default defineCachedEventHandler(
   async (event) => {
-    console.log(
-      "================= inside domain comparison handler ==============="
-    );
     const { names } = event.context.params || {};
     if (!names) {
       throw createError({
@@ -51,10 +48,11 @@ export default defineCachedEventHandler(
 
     console.log("response from the AI service: ", data);
 
-    await saveComparisonResult(domain1, domain2, data);
-
     try {
-      return extractAndParseJson<DomainsComparisonData>(data);
+      const res = extractAndParseJson<DomainsComparisonData>(data);
+      await saveComparisonResult(domain1, domain2, data);
+
+      return res;
     } catch (error) {
       console.error("Error parsing JSON data:", error);
       throw createError({

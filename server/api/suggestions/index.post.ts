@@ -25,10 +25,11 @@ export default defineEventHandler(async (event) => {
 
   console.log("response from the AI service: ", data);
 
-  await saveSuggestions(purpose, data);
-
   try {
-    return extractAndParseJson<DomainSuggestionsData>(data);
+    const res = extractAndParseJson<DomainSuggestionsData>(data);
+    await saveSuggestions(purpose, data);
+
+    return res;
   } catch (error) {
     console.error("Error parsing JSON data:", error);
     throw createError({

@@ -13,10 +13,6 @@ const saveInsights = async (name: string, data: string) => {
 
 export default defineCachedEventHandler(
   async (event) => {
-    console.log(
-      "================= inside domain insights handler ==============="
-    );
-
     const { name } = event.context.params || {};
     if (!name) {
       throw createError({
@@ -29,10 +25,11 @@ export default defineCachedEventHandler(
 
     console.log("response from the AI service: ", data);
 
-    await saveInsights(name, data);
-
     try {
-      return extractAndParseJson<DomainScoreData>(data);
+      const res = extractAndParseJson<DomainScoreData>(data);
+      await saveInsights(name, data);
+
+      return res;
     } catch (error) {
       console.error("Error parsing JSON data:", error);
       throw createError({
