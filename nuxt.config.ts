@@ -4,8 +4,8 @@ export default defineNuxtConfig({
 
   hub: {
     database: true,
-    kv: true,
-    blob: true,
+    kv: false,
+    blob: false,
     cache: true,
   },
 
