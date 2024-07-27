@@ -12,4 +12,6 @@ export abstract class BaseAIService implements AIService {
     firstDomain: string,
     secondDomain: string
   ): Promise<string>;
+
+  abstract getDomainSuggestions(purpose: string): Promise<string>;
 }

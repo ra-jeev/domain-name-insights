@@ -66,4 +66,23 @@ export class AnthropicAIService extends BaseAIService {
 
     return (response.content[0] as Anthropic.TextBlock).text;
   }
+
+  async getDomainSuggestions(purpose: string): Promise<string> {
+    const systemPrompt = this.getSystemPrompt("suggestions");
+
+    const response = await this.anthropic.messages.create({
+      model: "claude-3-5-sonnet-20240620",
+      max_tokens: 1000,
+      temperature: 0.4,
+      system: systemPrompt,
+      messages: [
+        {
+          role: "user",
+          content: `Generate domain name suggestions for the following purpose: ${purpose}`,
+        },
+      ],
+    });
+
+    return (response.content[0] as Anthropic.TextBlock).text;
+  }
 }
