@@ -116,11 +116,7 @@
           <h2 class="text-xl md:text-2xl font-bold mb-8">
             Not sure which domains to compare?
           </h2>
-          <UButton
-            size="lg"
-            to="/insights"
-            trailing-icon="i-heroicons-arrow-right"
-          >
+          <UButton size="lg" to="/" trailing-icon="i-heroicons-arrow-right">
             Analyze a Single Domain
           </UButton>
         </div>
