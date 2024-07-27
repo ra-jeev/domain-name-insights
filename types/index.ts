@@ -31,3 +31,13 @@ export type DomainsComparisonData = {
   recommendation: { choice: string; reasoning: string };
   domains: DomainScoreData[];
 };
+
+export type DomainSuggestion = {
+  domainName: string;
+  overallScore: number;
+  explanation: string;
+} & { [key in DomainScoreCategoryKeys]: number };
+
+export type DomainSuggestionsData = {
+  suggestions: DomainSuggestion[];
+};
