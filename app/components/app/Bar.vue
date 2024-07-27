@@ -7,13 +7,21 @@
       :class="`h-[--header-height]`"
     >
       <AppLogo />
-      <div>
+      <div class="flex items-center gap-x-6">
+        <ULink
+          to="/discover"
+          active-class="text-primary"
+          inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+        >
+          Name Ideas
+        </ULink>
+
         <ULink
           to="/compare"
           active-class="text-primary"
           inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
         >
-          Compare
+          Compare Names
         </ULink>
       </div>
       <div class="flex items-center gap-x-3">
