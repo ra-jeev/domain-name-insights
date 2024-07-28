@@ -6,14 +6,23 @@
       class="flex flex-wrap items-center justify-between"
       :class="`h-[--header-height]`"
     >
-      <AppLogo />
-      <div class="flex items-center gap-x-6">
+      <div class="flex items-center gap-3">
+        <UButton
+          icon="i-heroicons-bars-3-16-solid"
+          color="gray"
+          variant="ghost"
+          class="md:hidden"
+          @click="$emit('show-drawer')"
+        />
+        <AppLogo />
+      </div>
+      <div class="items-center gap-x-6 hidden md:flex">
         <ULink
           to="/discover"
           active-class="text-primary"
           inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
         >
-          Name Ideas
+          Get Ideas
         </ULink>
 
         <ULink

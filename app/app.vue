@@ -1,14 +1,42 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <AppBar />
+    <AppBar @show-drawer="showDrawer = true" />
     <main class="flex-1">
       <NuxtPage />
     </main>
+    <USlideover
+      v-model="showDrawer"
+      :ui="{ width: 'max-w-xs' }"
+      class="md:hidden"
+      side="left"
+    >
+      <AppSidebar :links="links" class="flex" />
+    </USlideover>
     <AppFooter />
   </div>
 </template>
 
 <script setup lang="ts">
+const showDrawer = ref(false);
+const onLinkClick = () => {
+  showDrawer.value = false;
+};
+
+const links = [
+  {
+    label: "Get Ideas",
+    icon: "i-mdi-home",
+    to: "/discover",
+    click: onLinkClick,
+  },
+  {
+    label: "Compare Names",
+    icon: "i-mdi-content-save-settings",
+    to: "/compare",
+    click: onLinkClick,
+  },
+];
+
 const colorMode = useColorMode();
 
 const color = computed(() =>
