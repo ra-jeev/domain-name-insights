@@ -44,19 +44,19 @@
             description="Receive tailored domain name suggestions based on your specific business purpose."
           />
           <FeatureCard
+            icon="i-heroicons-cpu-chip"
+            title="AI-Powered Analysis"
+            description="Our AI analyzes your domain name across six critical categories, providing an unbiased and holistic view of its potential."
+          />
+          <FeatureCard
             icon="i-heroicons-document-text"
             title="Detailed Insights"
             description="Get your domain's strengths and weaknesses breakdown, along with an overall score and category-specific ratings."
           />
           <FeatureCard
-            icon="i-heroicons-globe-alt"
-            title="SEO Considerations"
-            description="Understand how your domain name might impact your search engine optimization efforts and online visibility."
-          />
-          <FeatureCard
-            icon="i-heroicons-presentation-chart-line"
-            title="Market Potential Analysis"
-            description="Evaluate your domain's ability to attract and retain your target audience, supporting long-term business growth."
+            icon="i-heroicons-adjustments-horizontal"
+            title="Easy-to-Understand Results"
+            description="Get clear, actionable insights in an easy-to-understand format, simplifying your decision-making process."
           />
         </div>
       </UContainer>
