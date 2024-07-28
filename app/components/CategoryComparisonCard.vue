@@ -1,5 +1,5 @@
 <template>
-  <UCard class="comparison-card">
+  <UCard>
     <h3 class="text-xl font-semibold mb-4 sm:text-center">
       {{ categoryName }}
     </h3>

@@ -1,6 +1,14 @@
 <template>
   <UContainer class="py-12">
-    <DomainScoreLoader v-if="status === 'pending'" />
+    <template v-if="status === 'pending'">
+      <WinningDomainLoader class="w-full max-w-3xl mx-auto" />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <OverallScoreLoader />
+        <OverallScoreLoader />
+      </div>
+      <CategoryComparisonLoader class="mt-6" />
+      <CategoryComparisonLoader class="mt-6" />
+    </template>
 
     <div v-else-if="insights">
       <WinningDomainCard
