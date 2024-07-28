@@ -21,18 +21,21 @@
 
         <ScoreLegend />
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid gap-6">
           <template
             v-for="(categoryName, categoryKey) in DomainScoreCategory"
             :key="categoryKey"
           >
-            <CategoryScoreCard
+            <CategoryComparisonCard
               :category-name="categoryName"
-              :data="domain1Data.categoryScores[categoryKey]"
-            />
-            <CategoryScoreCard
-              :category-name="categoryName"
-              :data="domain2Data.categoryScores[categoryKey]"
+              :first-domain="{
+                name: domain1Data.domainName,
+                data: domain1Data.categoryScores[categoryKey],
+              }"
+              :second-domain="{
+                name: domain2Data.domainName,
+                data: domain2Data.categoryScores[categoryKey],
+              }"
             />
           </template>
         </div>
