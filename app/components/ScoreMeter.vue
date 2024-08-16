@@ -29,7 +29,15 @@
         :r="circleRadius"
         cx="50"
         cy="50"
-      />
+      >
+        <animate
+          attributeName="stroke-dasharray"
+          :from="`0 ${circumference}`"
+          :to="dashArray"
+          dur="1s"
+          fill="freeze"
+        />
+      </circle>
     </svg>
 
     <div class="absolute inset-0 flex items-center justify-center">
