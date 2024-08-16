@@ -6,12 +6,36 @@ export abstract class BaseAIService implements AIService {
     return getSystemPrompt(promptType);
   }
 
-  abstract getDomainScore(domainName: string): Promise<string>;
-
-  abstract compareDomains(
-    firstDomain: string,
-    secondDomain: string
+  abstract makeAIRequest(
+    maxTokens: number,
+    systemPrompt: string,
+    message: string
   ): Promise<string>;
 
-  abstract getDomainSuggestions(purpose: string): Promise<string>;
+  async getDomainScore(domainName: string): Promise<string> {
+    return this.makeAIRequest(
+      1000,
+      this.getSystemPrompt("score"),
+      `Analyze the domain name: ${domainName}`
+    );
+  }
+
+  async compareDomains(
+    firstDomain: string,
+    secondDomain: string
+  ): Promise<string> {
+    return await this.makeAIRequest(
+      1500,
+      this.getSystemPrompt("compare"),
+      `Compare the following domain names: ${firstDomain} and ${secondDomain}`
+    );
+  }
+
+  async getDomainSuggestions(purpose: string): Promise<string> {
+    return await this.makeAIRequest(
+      1000,
+      this.getSystemPrompt("suggestions"),
+      `Generate domain name suggestions for the following purpose: ${purpose}`
+    );
+  }
 }
