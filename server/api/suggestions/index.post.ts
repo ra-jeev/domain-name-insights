@@ -21,20 +21,45 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const data = await getAIService().getDomainSuggestions(purpose);
+  const promises = [
+    getAIService("Anthropic").getDomainSuggestions(purpose),
+    getAIService("HubAI").getDomainSuggestions(purpose),
+  ];
 
-  console.log("response from the AI service: ", data);
+  const results = await Promise.allSettled(promises);
 
-  try {
-    const res = extractAndParseJson<DomainSuggestionsData>(data);
-    await saveSuggestions(purpose, data);
+  const response: {
+    parsed: {
+      anthropic?: DomainSuggestionsData;
+      hubAi?: DomainSuggestionsData;
+    };
+    rawStrings: {
+      anthropic?: string;
+      hubAi?: string;
+    };
+  } = { parsed: {}, rawStrings: {} };
 
-    return res;
-  } catch (error) {
-    console.error("Error parsing JSON data:", error);
-    throw createError({
-      statusCode: 422,
-      statusMessage: "Failed to generate suggestions. Please try again.",
-    });
+  results.forEach((result, index) => {
+    const key = index === 0 ? "anthropic" : "hubAi";
+    if (result.status === "fulfilled") {
+      try {
+        const parsedResult = extractAndParseJson<DomainSuggestionsData>(
+          result.value
+        );
+
+        response.parsed[key] = parsedResult;
+        response.rawStrings[key] = result.value;
+      } catch (error) {
+        console.error(`Error parsing JSON for ${key}:`, error);
+      }
+    } else {
+      console.error(`Error from ${key}:`, result.reason);
+    }
+  });
+
+  if (Object.keys(response.rawStrings).length) {
+    await saveSuggestions(purpose, JSON.stringify(response.rawStrings));
   }
+
+  return response.parsed;
 });

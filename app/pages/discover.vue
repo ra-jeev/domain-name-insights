@@ -1,13 +1,13 @@
 <template>
   <UContainer class="py-12 w-full max-w-4xl mx-auto">
-    <section :class="`${suggestions.length ? 'py-8' : 'py-16'}`">
+    <section :class="`${response ? 'py-8' : 'py-16'}`">
       <div
         :class="[
           'flex flex-col items-center w-full mx-auto',
-          suggestions.length ? 'max-w-full' : 'max-w-lg text-center',
+          response ? 'max-w-full' : 'max-w-lg text-center',
         ]"
       >
-        <template v-if="!suggestions.length">
+        <template v-if="!response">
           <h1 class="text-4xl md:text-5xl font-extrabold !leading-tight mb-4">
             <span class="text-primary">Discover</span> Your Perfect Domain Name
           </h1>
@@ -20,9 +20,7 @@
         <form
           :class="[
             'w-full space-y-4',
-            suggestions.length
-              ? 'flex items-center space-y-0 space-x-4'
-              : 'max-w-md',
+            response ? 'flex items-center space-y-0 space-x-4' : 'max-w-md',
           ]"
           @submit.prevent="getDomainSuggestions"
         >
@@ -33,11 +31,11 @@
             autoresize
             :rows="1"
             :maxrows="3"
-            :class="suggestions.length ? 'flex-grow' : 'w-full'"
+            :class="response ? 'flex-grow' : 'w-full'"
           />
 
           <UButton
-            :block="!suggestions.length"
+            :block="!response"
             size="lg"
             trailing-icon="i-mdi-lightbulb-on-outline"
             type="submit"
@@ -53,7 +51,7 @@
           icon="i-heroicons-exclamation-triangle-solid"
           color="red"
           class="text-start mt-4"
-          :class="suggestions.length ? 'w-full' : 'max-w-md'"
+          :class="response ? 'w-full' : 'max-w-md'"
           :close-button="{
             icon: 'i-heroicons-x-mark',
             color: 'white',
@@ -66,29 +64,57 @@
       </div>
     </section>
 
-    <section v-if="suggestions.length > 0" class="mt-8">
-      <h2
-        class="text-2xl md:text-3xl lg:text-4xl text-center font-semibold mb-6"
-      >
-        Your Suggested Domains
-      </h2>
-      <div class="space-y-6">
-        <DomainSuggestionCard
-          v-for="suggestion in suggestions"
-          :key="suggestion.domainName"
-          :suggestion="suggestion"
-        />
-      </div>
-    </section>
+    <UTabs v-if="response" v-model="activeTab" :items="items" class="w-full">
+      <template #item>
+        <section v-if="suggestions?.length" class="mt-8">
+          <h2
+            class="text-2xl md:text-3xl lg:text-4xl text-center font-semibold mb-6"
+          >
+            Your Suggested Domains
+          </h2>
+          <div class="space-y-6">
+            <DomainSuggestionCard
+              v-for="suggestion in suggestions"
+              :key="suggestion.domainName"
+              :suggestion="suggestion"
+            />
+          </div>
+        </section>
+        <UCard v-else class="text-center">
+          Failed to generate domain name ideas. Please try again.
+        </UCard>
+      </template>
+    </UTabs>
   </UContainer>
 </template>
 
 <script setup lang="ts">
-import { type DomainSuggestionsData } from "~~/types";
+import type { DomainSuggestionsData } from "~~/types";
+
+const items = [
+  {
+    key: "anthropic",
+    label: "Claude 3.5 Sonnet",
+  },
+  {
+    key: "hubAi",
+    label: "Llama 3.1 8B",
+  },
+];
 
 const purpose = ref("");
+const activeTab = ref(0);
+const response = ref<{
+  anthropic?: DomainSuggestionsData;
+  hubAi?: DomainSuggestionsData;
+}>();
 
-const suggestions = ref<DomainSuggestionsData["suggestions"]>([]);
+const suggestions = computed(() => {
+  return activeTab.value === 0
+    ? response.value?.anthropic?.suggestions
+    : response.value?.hubAi?.suggestions;
+});
+
 const isLoading = ref(false);
 const error = ref("");
 
@@ -100,16 +126,16 @@ async function getDomainSuggestions() {
 
   isLoading.value = true;
   error.value = "";
-  suggestions.value = [];
+  response.value = undefined;
 
   try {
-    const res = await $fetch<DomainSuggestionsData>("/api/suggestions", {
+    const res = await $fetch("/api/suggestions", {
       method: "POST",
       body: { purpose: purpose.value },
     });
 
     if (res) {
-      suggestions.value = res.suggestions;
+      response.value = res;
     } else {
       throw new Error("No suggestions received");
     }
