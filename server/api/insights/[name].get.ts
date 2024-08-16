@@ -21,22 +21,47 @@ export default defineCachedEventHandler(
       });
     }
 
-    const data = await getAIService().getDomainScore(name);
+    const promises = [
+      getAIService("Anthropic").getDomainScore(name),
+      getAIService("HubAI").getDomainScore(name),
+    ];
 
-    console.log("response from the AI service: ", data);
+    const results = await Promise.allSettled(promises);
 
-    try {
-      const res = extractAndParseJson<DomainScoreData>(data);
-      await saveInsights(name, data);
+    const response: {
+      parsed: {
+        anthropic?: DomainScoreData;
+        hubAi?: DomainScoreData;
+      };
+      rawStrings: {
+        anthropic?: string;
+        hubAi?: string;
+      };
+    } = { parsed: {}, rawStrings: {} };
 
-      return res;
-    } catch (error) {
-      console.error("Error parsing JSON data:", error);
-      throw createError({
-        statusCode: 422,
-        statusMessage: "Failed to generate insights. Please try again.",
-      });
+    results.forEach((result, index) => {
+      const key = index === 0 ? "anthropic" : "hubAi";
+      if (result.status === "fulfilled") {
+        try {
+          const parsedResult = extractAndParseJson<DomainScoreData>(
+            result.value
+          );
+
+          response.parsed[key] = parsedResult;
+          response.rawStrings[key] = result.value;
+        } catch (error) {
+          console.error(`Error parsing JSON for ${key}:`, error);
+        }
+      } else {
+        console.error(`Error from ${key}:`, result.reason);
+      }
+    });
+
+    if (Object.keys(response.rawStrings).length) {
+      await saveInsights(name, JSON.stringify(response.rawStrings));
     }
+
+    return response.parsed;
   },
   {
     maxAge: 24 * 60 * 60, // 1 day
