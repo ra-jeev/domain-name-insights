@@ -11,7 +11,7 @@
             ? 'text-gray-100 dark:text-gray-800'
             : 'text-gray-200 dark:text-gray-700'
         }`"
-        stroke-width="10"
+        :stroke-width="strokeWidth"
         stroke="currentColor"
         fill="transparent"
         :r="circleRadius"
@@ -21,9 +21,10 @@
 
       <circle
         :class="colorClass"
-        stroke-width="10"
+        :stroke-width="strokeWidth"
         :stroke-dasharray="dashArray"
         :stroke-dashoffset="dashOffset"
+        stroke-linecap="round"
         stroke="currentColor"
         fill="transparent"
         :r="circleRadius"
@@ -66,15 +67,20 @@ const props = defineProps({
 });
 
 const circleRadius = 45;
+const strokeWidth = 10;
 const circumference = computed(() => 2 * Math.PI * circleRadius);
 const dashArray = computed(() => {
-  const dashLength = (circumference.value * props.percentage) / 100;
+  const dashLength =
+    (circumference.value * props.percentage) / 100 - strokeWidth; // account for the rounding
   const gapLength = circumference.value - dashLength;
   return `${dashLength} ${gapLength}`;
 });
 
 // To start from the top, give an offset of one quarter of the circle
-const dashOffset = computed(() => `${circumference.value * 0.25}`);
+// and subtract half the stroke width to account for the rounding
+const dashOffset = computed(
+  () => `${circumference.value * 0.25 - strokeWidth / 2}`
+);
 
 const colorClass = computed(() => {
   if (props.isSkeleton) {
