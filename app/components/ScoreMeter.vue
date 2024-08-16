@@ -32,6 +32,7 @@
         cy="50"
       >
         <animate
+          :key="percentage"
           attributeName="stroke-dasharray"
           :from="`0 ${circumference}`"
           :to="dashArray"
