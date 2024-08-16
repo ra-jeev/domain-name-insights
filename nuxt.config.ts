@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     kv: false,
     blob: false,
     cache: true,
+    ai: true,
   },
 
   nitro: {
@@ -16,10 +17,6 @@ export default defineNuxtConfig({
   },
 
   devtools: { enabled: true },
-
-  ui: {
-    icons: ["mdi", "simple-icons"],
-  },
 
   compatibilityDate: "2024-07-26",
 });

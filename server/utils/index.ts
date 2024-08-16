@@ -14,6 +14,7 @@ export function extractAndParseJson<T>(text: string): T {
       try {
         return JSON.parse(content) as T;
       } catch (error) {
+        console.error("Error parsing JSON:", error);
         continue;
       }
     }
