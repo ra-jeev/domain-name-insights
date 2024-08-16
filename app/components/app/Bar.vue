@@ -20,7 +20,7 @@
         <ULink
           to="/discover"
           active-class="text-primary"
-          inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+          inactive-class="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary"
         >
           Get Ideas
         </ULink>
@@ -28,7 +28,7 @@
         <ULink
           to="/compare"
           active-class="text-primary"
-          inactive-class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+          inactive-class="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary"
         >
           Compare Names
         </ULink>
