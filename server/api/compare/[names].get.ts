@@ -44,22 +44,51 @@ export default defineCachedEventHandler(
       });
     }
 
-    const data = await getAIService().compareDomains(domain1, domain2);
+    const promises = [
+      getAIService("Anthropic").compareDomains(domain1, domain2),
+      getAIService("HubAI").compareDomains(domain1, domain2),
+    ];
 
-    console.log("response from the AI service: ", data);
+    const results = await Promise.allSettled(promises);
 
-    try {
-      const res = extractAndParseJson<DomainsComparisonData>(data);
-      await saveComparisonResult(domain1, domain2, data);
+    const response: {
+      parsed: {
+        anthropic?: DomainsComparisonData;
+        hubAi?: DomainsComparisonData;
+      };
+      rawStrings: {
+        anthropic?: string;
+        hubAi?: string;
+      };
+    } = { parsed: {}, rawStrings: {} };
 
-      return res;
-    } catch (error) {
-      console.error("Error parsing JSON data:", error);
-      throw createError({
-        statusCode: 422,
-        statusMessage: "Failed to compare domains. Please try again.",
-      });
+    results.forEach((result, index) => {
+      const key = index === 0 ? "anthropic" : "hubAi";
+      if (result.status === "fulfilled") {
+        try {
+          const parsedResult = extractAndParseJson<DomainsComparisonData>(
+            result.value
+          );
+
+          response.parsed[key] = parsedResult;
+          response.rawStrings[key] = result.value;
+        } catch (error) {
+          console.error(`Error parsing JSON for ${key}:`, error);
+        }
+      } else {
+        console.error(`Error from ${key}:`, result.reason);
+      }
+    });
+
+    if (Object.keys(response.rawStrings).length) {
+      await saveComparisonResult(
+        domain1,
+        domain2,
+        JSON.stringify(response.rawStrings)
+      );
     }
+
+    return response.parsed;
   },
   {
     maxAge: 24 * 60 * 60, // 1 day

@@ -31,9 +31,5 @@ defineProps({
     type: String,
     required: true,
   },
-  score: {
-    type: Number,
-    required: true,
-  },
 });
 </script>
