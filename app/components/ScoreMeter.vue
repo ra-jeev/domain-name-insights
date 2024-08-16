@@ -22,7 +22,7 @@
       <circle
         :class="colorClass"
         stroke-width="10"
-        :stroke-dasharray="circumference"
+        :stroke-dasharray="dashArray"
         :stroke-dashoffset="dashOffset"
         stroke="currentColor"
         fill="transparent"
@@ -59,9 +59,14 @@ const props = defineProps({
 
 const circleRadius = 45;
 const circumference = computed(() => 2 * Math.PI * circleRadius);
-const dashOffset = computed(
-  () => circumference.value - (props.percentage / 100) * circumference.value
-);
+const dashArray = computed(() => {
+  const dashLength = (circumference.value * props.percentage) / 100;
+  const gapLength = circumference.value - dashLength;
+  return `${dashLength} ${gapLength}`;
+});
+
+// To start from the top, give an offset of one quarter of the circle
+const dashOffset = computed(() => `${circumference.value * 0.25}`);
 
 const colorClass = computed(() => {
   if (props.isSkeleton) {
