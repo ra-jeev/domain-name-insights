@@ -26,59 +26,20 @@ export class AnthropicAIService extends BaseAIService {
     return AnthropicAIService.instance;
   }
 
-  async getDomainScore(domainName: string): Promise<string> {
-    const systemPrompt = this.getSystemPrompt("score");
-
-    const response = await this.anthropic.messages.create({
-      model: "claude-3-5-sonnet-20240620",
-      max_tokens: 1000,
-      temperature: 0.4,
-      system: systemPrompt,
-      messages: [
-        {
-          role: "user",
-          content: `Analyze the domain name: ${domainName}`,
-        },
-      ],
-    });
-
-    return (response.content[0] as Anthropic.TextBlock).text;
-  }
-
-  async compareDomains(
-    firstDomain: string,
-    secondDomain: string
+  async makeAIRequest(
+    maxTokens: number,
+    systemPrompt: string,
+    message: string
   ): Promise<string> {
-    const systemPrompt = this.getSystemPrompt("compare");
-
     const response = await this.anthropic.messages.create({
       model: "claude-3-5-sonnet-20240620",
-      max_tokens: 1500,
+      max_tokens: maxTokens,
       temperature: 0.4,
       system: systemPrompt,
       messages: [
         {
           role: "user",
-          content: `Compare the following domain names: ${firstDomain} and ${secondDomain}`,
-        },
-      ],
-    });
-
-    return (response.content[0] as Anthropic.TextBlock).text;
-  }
-
-  async getDomainSuggestions(purpose: string): Promise<string> {
-    const systemPrompt = this.getSystemPrompt("suggestions");
-
-    const response = await this.anthropic.messages.create({
-      model: "claude-3-5-sonnet-20240620",
-      max_tokens: 1000,
-      temperature: 0.4,
-      system: systemPrompt,
-      messages: [
-        {
-          role: "user",
-          content: `Generate domain name suggestions for the following purpose: ${purpose}`,
+          content: message,
         },
       ],
     });
