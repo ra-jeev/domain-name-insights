@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen px-24 pt-20">
     <AppBar @show-drawer="showDrawer = true" />
     <main class="flex-1">
       <NuxtPage />
@@ -59,10 +59,23 @@ useHead({
   },
 });
 
+const title = "Name Insights";
+const description =
+  "Get detailed insights on any potential domain name, and see how it compares to other names on various important aspects. Get fresh name ideas for your next domain name.";
+const siteUrl = "https://name-insights.nuxt.dev";
+const imageUrl = `${siteUrl}/hero.png`;
+
 useSeoMeta({
-  title: "Name Insights",
-  description:
-    "Get detailed insights on any potential domain name and see how it compares to other domains.",
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description,
+  ogImage: imageUrl,
+  ogUrl: siteUrl,
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: imageUrl,
+  twitterCard: "summary_large_image",
 });
 </script>
 
