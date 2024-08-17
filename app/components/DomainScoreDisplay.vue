@@ -13,7 +13,7 @@
       </div>
     </template>
     <UCard v-else class="text-center">
-      "Failed to generate insights. Please try again.
+      Failed to generate insights. Please try again.
     </UCard>
   </div>
 </template>
