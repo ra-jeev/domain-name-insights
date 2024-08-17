@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen px-24 pt-20">
+  <div class="flex flex-col min-h-screen">
     <AppBar @show-drawer="showDrawer = true" />
     <main class="flex-1">
       <NuxtPage />
